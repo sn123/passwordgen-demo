@@ -1,10 +1,13 @@
 package main
 
 import (
+	"fmt"
+	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
-	"os"
+
 	echotemplate "github.com/foolin/echo-template"
 	passwordgen "github.com/goavega-software/passwordgenerator"
 	"github.com/labstack/echo"
@@ -12,9 +15,6 @@ import (
 
 func main() {
 	e := echo.New()
-
-
-
 	e.Renderer = echotemplate.Default()
 
 	e.GET("/", func(c echo.Context) error {
@@ -41,6 +41,9 @@ func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
+		log.Printf("Defaulting to port %s", port)
 	}
-	e.Logger.Fatal(e.Start(":" + port))
+
+	log.Printf("Listening on port %s", port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), e))
 }
