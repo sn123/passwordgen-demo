@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-
+	"os"
 	echotemplate "github.com/foolin/echo-template"
 	passwordgen "github.com/goavega-software/passwordgenerator"
 	"github.com/labstack/echo"
@@ -41,5 +41,9 @@ func main() {
 
 		return c.Render(http.StatusOK, "index.html", echo.Map{"passwords": sb.String()})
 	})
-	e.Logger.Fatal(e.Start(":1323"))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	e.Logger.Fatal(e.Start(":" + port))
 }
