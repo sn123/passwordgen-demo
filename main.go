@@ -8,15 +8,12 @@ import (
 	echotemplate "github.com/foolin/echo-template"
 	passwordgen "github.com/goavega-software/passwordgenerator"
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
 )
 
 func main() {
 	e := echo.New()
 
-	// Middleware
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+
 
 	e.Renderer = echotemplate.Default()
 
