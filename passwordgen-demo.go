@@ -14,7 +14,8 @@ import (
 func main() {
 	e := echo.New()
 	e.Renderer = echotemplate.Default()
-
+	e.Static("/js", "js")
+	e.Static("/css", "css")
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "index.html", echo.Map{
 			"passwords": "",

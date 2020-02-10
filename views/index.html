@@ -1,66 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Goavega Software">
-
-    <title>Password Generator</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-        .form {
-            width: 100%;
-            max-width: 330px;
-            padding: 15px;
-            margin: 0 auto;
-        }
-
-        .form-control,
-        .btn {
-            -webkit-border-radius: 0;
-            -moz-border-radius: 0;
-            border-radius: 0;
-        }
-
-        textarea {
-            max-width: 100%;
-            width: 500px;
-            border-style: none solid solid none;
-            border-width: medium 1px 1px medium;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
-            color: #555;
-            line-height: 1.4em;
-            padding: 5px 8px;
-            display: block;
-            margin: 0 auto;
-        }
-    </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <title>Password generator demo</title>
 </head>
 
 <body>
-    <div class="jumbotron">
-        <h1 class="h3 mb-3 font-weight-normal">Simple Password Generator (TM)</h1>
-        <div class="alert alert-info">
-            Generate easy to remember (one time) 8 character long passwords. It does so by making up passwords with a
-            mix
-            of consonants and vowels pair and then appending random digits in the end.
-        </div>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="https://github.com/goavega-software/passwordgenerator"
-                role="button">Github</a>
-        </p>
-    </div>
-    <form class="form" method="POST" class="text-center">
-
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="number" id="num" name="num" class="form-control" placeholder="# of passwords to generate" min="1"
-            max="20" step="1" required autofocus>
-        <button class="btn btn-lg btn-danger btn-block" type="submit">Generate</button>
-    </form>
-    <textarea rows="8" readonly>{{.passwords}}</textarea>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
 </body>
 
 </html>

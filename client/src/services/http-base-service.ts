@@ -12,8 +12,6 @@ export class HttpBaseService {
     errorCallback: (statusCode: number) => void,
     loadingCallback: (really: boolean) => void
   ) {
-    console.log('endpoint', process.env.apiEndPoint);
-    // axios.defaults.baseURL = 'http://localhost:8080';
     axios.defaults.headers = {
       'content-type': 'application/json'
     };
