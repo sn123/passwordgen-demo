@@ -5,8 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strconv"
-	"strings"
 
 	echotemplate "github.com/foolin/echo-template"
 	passwordgen "github.com/goavega-software/passwordgenerator"
@@ -23,20 +21,37 @@ func main() {
 		})
 	})
 
-	e.POST("/", func(c echo.Context) error {
-		i := 0
-		num, err := strconv.Atoi(c.FormValue("num"))
-		if err != nil {
-			num = 8
+	e.POST("/api/generate", func(c echo.Context) error {
+
+		var response struct {
+			Data struct {
+				Passwords []string `json:"passwords"`
+			} `json:"data"`
+			Errors []string `json:"errors"`
 		}
-		var sb strings.Builder
-		for i < num {
-			sb.WriteString(passwordgen.Generate())
-			sb.WriteString("\n")
+		request := new(passwordgen.GenerateRequest)
+
+		if reqErr := c.Bind(request); reqErr != nil {
+			fmt.Print(reqErr)
+			response.Errors = append(response.Errors, "Invalid request")
+			return c.JSON(http.StatusBadRequest, response)
+		}
+		i := 0
+		if request.NumPasswords > 8 {
+			request.NumPasswords = 8
+		}
+		var (
+			passwords []string
+			password  string
+		)
+		for i < request.NumPasswords {
+			password = passwordgen.Generate(*request)
+			passwords = append(passwords, password)
 			i++
 		}
 
-		return c.Render(http.StatusOK, "index.html", echo.Map{"passwords": sb.String()})
+		response.Data.Passwords = passwords
+		return c.JSON(http.StatusOK, response)
 	})
 	port := os.Getenv("PORT")
 	if port == "" {
